@@ -15,7 +15,7 @@ seo:
       value: website
       keyName: property
     - name: 'og:title'
-      value: Posts by Dave LOngley
+      value: Posts by Dave Longley
       keyName: property
     - name: 'og:description'
       value: This is the author archive page
