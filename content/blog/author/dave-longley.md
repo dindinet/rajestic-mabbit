@@ -8,7 +8,7 @@ sections:
     show_recent: false
     author: data/team/dave-longley.json
 seo:
-  title: Posts by Dave Ameter
+  title: Posts by Dave Longley
   description: This is the author archive page
   extra:
     - name: 'og:type'
