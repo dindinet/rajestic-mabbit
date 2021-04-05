@@ -2,7 +2,7 @@
 title: Dianne Ameter
 sections:
   - type: hero_section
-    title: All Posts By Dave Ameter
+    title: All Posts By Dave LOngley
     align: center
   - type: blog_feed_section
     show_recent: false
