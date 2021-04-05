@@ -15,7 +15,7 @@ seo:
       value: website
       keyName: property
     - name: 'og:title'
-      value: Posts by Dianne Ameter
+      value: Posts by Dave Ameter
       keyName: property
     - name: 'og:description'
       value: This is the author archive page
