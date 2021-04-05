@@ -6,7 +6,7 @@ sections:
     align: center
   - type: blog_feed_section
     show_recent: false
-    author: data/team/dianne-ameter.json
+    author: data/team/dave-ameter.json
 seo:
   title: Posts by Dianne Ameter
   description: This is the author archive page
