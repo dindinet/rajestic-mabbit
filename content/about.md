@@ -5,6 +5,7 @@ sections:
     title: Who We Are
     align: right
     image: images/hero.svg
+    image_position: right
   - type: content_section
     content: >-
       Nisi porta lorem mollis aliquam ut porttitor. Pellentesque dignissim enim
