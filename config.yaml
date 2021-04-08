@@ -19,7 +19,7 @@ params:
         style: link
       - url: /contact
         style: primary
-        label: COntact-
+        label: COntact Us
   footer:
     has_nav: true
     nav_links:
