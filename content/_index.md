@@ -69,7 +69,7 @@ sections:
   - type: blog_feed_section
     title: What's New
     show_recent: true
-    recent_count: 6
+    recent_count: 2
   - type: cta_section
     title: This Is A CTA
     subtitle: >-
