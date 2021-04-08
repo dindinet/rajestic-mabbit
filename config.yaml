@@ -19,7 +19,7 @@ params:
         style: link
       - label: Contact Us
         url: /contact
-        style: secondary
+        style: link
   footer:
     has_nav: false
     nav_links:
