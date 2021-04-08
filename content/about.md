@@ -4,7 +4,6 @@ sections:
   - type: hero_section
     title: Who We Are
     align: center
-    image: images/hero.svg
     image_position: right
   - type: content_section
     content: >-
