@@ -17,8 +17,7 @@ params:
       - label: Style Guide
         url: /style-guide
         style: link
-      - label: Contact Us
-        url: /contact
+      - url: /contact
         style: primary
   footer:
     has_nav: true
