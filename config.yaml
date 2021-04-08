@@ -33,7 +33,7 @@ params:
     social_links:
       - label: Twitter
         url: 'https://twitter.com/'
-        style: secondary
+        style: primary
         new_window: true
       - label: GitHub
         url: 'https://github.com/'
