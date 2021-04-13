@@ -17,9 +17,11 @@ layout: post
 author: data/team/dave-longley.json
 image: images/5.png
 ---
-## Lorem ipsum
+## Sheep of Dipsum
 
 Lorem ipsum dolor sit amet, **consectetur adipiscing elit**, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-- Lorem ipsum
-- dolor sit amet
+*   Lorem ipsum
+*   dolor sit amet
+
+![](https://res.cloudinary.com/dklongley/image/upload/w\_400/borrego.jpg)
