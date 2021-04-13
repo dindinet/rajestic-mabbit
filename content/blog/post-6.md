@@ -5,7 +5,7 @@ categories:
   - data/categories/news.json
   - data/categories/tutorials.json
 tags: []
-image_alt: lorem-ipsum
+image_alt: Pomme
 excerpt: lorem-ipsum
 seo:
   title: ''
