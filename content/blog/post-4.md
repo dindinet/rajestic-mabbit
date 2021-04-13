@@ -8,7 +8,7 @@ categories:
 tags:
   - JAMstack
   - Sourcebit
-image: images/4.png
+image: images/bananas.png
 image_alt: Post 4 placeholder image
 excerpt: >-
   Itaque hoc frequenter dici solet a vobis, non intellegere nos, quam dicat
