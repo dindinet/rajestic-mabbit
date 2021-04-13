@@ -7,7 +7,7 @@ categories:
 tags:
   - Stackbit
   - JAMstack
-image: https://res.cloudinary.com/dklongley/image/upload/w_362/honeydew.png
+image: https://res.cloudinary.com/dklongley/image/upload/honeydew.png
 image_alt: Post 3 placeholder image
 excerpt: >-
   Quis est, qui non oderit libidinosam, protervam adolescentiam? Innumerabilia
