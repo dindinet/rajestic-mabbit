@@ -59,7 +59,7 @@ sections:
           eget nunc. Lacus sed turpis tincidunt id aliquet risus feugiat in
           ante.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/lemons.jpg
+        image: https://res.cloudinary.com/dklongley/image/upload/w_558lemons.jpg
         image_alt: Feature 3 placeholder image
         image_position: right
         actions:
