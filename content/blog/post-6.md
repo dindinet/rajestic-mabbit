@@ -6,7 +6,10 @@ categories:
   - data/categories/tutorials.json
 tags: []
 image_alt: Pomme
-excerpt: "Libidinosam, protervam adolescentiam?\_Itaque hoc frequenter dici solet a vobis, non intellegere nos, quam dicat Epicurus voluptatem. Sin kakan malitiam dixisses, ad aliud nos unum certum vitium consuetudo Latina traduceret."
+excerpt: >-
+  Quadripedalis est ovium, quæ ruminant mammalibus, penitus ignoramus quia
+  jumentis infinita substantia. Velut omnes ruminant, et ovium Perissodactyla
+  membra Ordinis, quod etiam-toed ungulates.
 seo:
   title: ''
   description: ''
@@ -15,7 +18,7 @@ seo:
   type: stackbit_page_meta
 layout: post
 author: data/team/dave-longley.json
-image: https://res.cloudinary.com/dklongley/image/upload/w_300/borrego.jpg
+image: 'https://res.cloudinary.com/dklongley/image/upload/w_300/borrego.jpg'
 ---
 ## Sheep of Dipsum
 
