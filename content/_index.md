@@ -14,7 +14,8 @@ sections:
         url: /contact
         style: secondary
     align: left
-    image: https://res.cloudinary.com/dklongley/image/upload/w_558/gallerymultipapo.jpg
+    image: >-
+      https://res.cloudinary.com/dklongley/image/upload/w_558/gallerymultipapo.jpg
     image_alt: Hero placeholder image
     image_position: right
     has_background: true
@@ -33,7 +34,7 @@ sections:
           ligula, cursus id molestie vel, maximus aliquet risus. Vivamus in nibh
           fringilla, fringilla.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/w_558/honeydew.jpg
+        image: 'https://res.cloudinary.com/dklongley/image/upload/w_558/honeydew.jpg'
         image_alt: Feature 1 placeholder image
         image_position: right
         actions:
@@ -46,7 +47,7 @@ sections:
           diam quam nulla. Ullamcorper a lacus vestibulum sed arcu non odio
           euismod lacinia.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/w_558/bananas.jpg
+        image: 'https://res.cloudinary.com/dklongley/image/upload/w_558/bananas.jpg'
         image_alt: Feature 2 placeholder image
         image_position: left
         actions:
@@ -59,7 +60,7 @@ sections:
           eget nunc. Lacus sed turpis tincidunt id aliquet risus feugiat in
           ante.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/w_558/lemons.jpg
+        image: 'https://res.cloudinary.com/dklongley/image/upload/w_558/lemons.jpg'
         image_alt: Feature 3 placeholder image
         image_position: right
         actions:
@@ -69,7 +70,7 @@ sections:
   - type: blog_feed_section
     title: What's New
     show_recent: true
-    recent_count: 3
+    recent_count: 6
   - type: cta_section
     title: This Is A CTA
     subtitle: >-
