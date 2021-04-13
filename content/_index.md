@@ -33,7 +33,7 @@ sections:
           ligula, cursus id molestie vel, maximus aliquet risus. Vivamus in nibh
           fringilla, fringilla.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/v1615338258/honeydew.png
+        image: https://res.cloudinary.com/dklongley/image/upload/v1615338258/honeydew.
         image_alt: Feature 1 placeholder image
         image_position: right
         actions:
