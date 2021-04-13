@@ -27,6 +27,7 @@ sections:
       - data/team/eleanor-carr.json
       - data/team/hanson-deck.json
       - data/team/gordon-norman.json
+      - data/team/dave-longley.json
   - type: cta_section
     title: Join the Team
     subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
