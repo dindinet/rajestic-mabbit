@@ -3,7 +3,7 @@
     "link": "blog/author/dave-longley",
     "first_name": "David",
     "last_name": "Longley",
-    "photo": "images/dream_1z59te5hq0i.jpg",
+    "photo": """images/dream_1z59te5hq0i.jpg",
     "photo_alt": "David Longley",
     "bio": "Crusty who worked in computing before it became IT. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl ligula, cursus id molestie vel, maximus aliquet risus.\n"
 }
