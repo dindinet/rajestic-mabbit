@@ -5,7 +5,7 @@ author: data/team/dianne-ameter.json
 categories:
   - data/categories/tutorials.json
   - data/categories/general.json
-image: images/1.png
+image: https://res.cloudinary.com/dklongley/image/upload/v1615337549/Apple.png
 image_alt: Post 1 placeholder image
 excerpt: >-
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ea mala virtuti
