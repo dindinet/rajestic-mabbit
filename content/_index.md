@@ -18,7 +18,7 @@ sections:
       https://res.cloudinary.com/dklongley/image/upload/w_558/gallerymultipapo.jpg
     image_alt: Hero placeholder image
     image_position: right
-    has_background: true
+    has_background: false
     background:
       background_color: blue
       background_image: images/SunriseCosta-Brava-Spain-1600x2560 (1).jpg
