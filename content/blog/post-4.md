@@ -8,7 +8,7 @@ categories:
 tags:
   - JAMstack
   - Sourcebit
-image: https://res.cloudinary.com/dklongley/image/upload/apple.jpg
+image: https://res.cloudinary.com/dklongley/image/upload/lemons.jpg
 image_alt: Post 4 placeholder image
 excerpt: >-
   Itaque hoc frequenter dici solet a vobis, non intellegere nos, quam dicat
