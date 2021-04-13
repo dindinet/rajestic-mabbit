@@ -4,7 +4,7 @@
   <div class="card">
     {{ if $post.Params.image }}
     <a class="card__media card__media--top" href="{{ $post.URL }}">
-      <img src="{{ replace $post.Params.image "upload" "/w_362"  | relURL }}" alt="{{ $post.Params.image_alt }}" />
+      <img src="{{ replace $post.Params.image "upload" "upload/w_362"  | relURL }}" alt="{{ $post.Params.image_alt }}" />
     </a>
     {{ end }}
     <div class="card__body">
