@@ -1,5 +1,5 @@
 ---
-title: lorem-ipsum
+title: COntact Us
 sections: []
 seo:
   title: ''
