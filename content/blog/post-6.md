@@ -1,5 +1,5 @@
 ---
-title: Lorem-ipsum makes us Tipsum
+title: Lorem Ipsum makes us Tipsum
 date: '2021-04-13'
 categories: []
 tags: []
