@@ -6,10 +6,7 @@ categories:
   - data/categories/tutorials.json
 tags: []
 image_alt: Pomme
-excerpt: >-
-  Itaque hoc frequenter dici solet a vobis, non intellegere nos, quam dicat
-  Epicurus voluptatem. Sin kakan malitiam dixisses, ad aliud nos unum certum
-  vitium consuetudo Latina traduceret.
+excerpt: "Libidinosam, protervam adolescentiam?\_Itaque hoc frequenter dici solet a vobis, non intellegere nos, quam dicat Epicurus voluptatem. Sin kakan malitiam dixisses, ad aliud nos unum certum vitium consuetudo Latina traduceret."
 seo:
   title: ''
   description: ''
