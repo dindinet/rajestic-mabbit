@@ -14,7 +14,7 @@ sections:
         url: /contact
         style: secondary
     align: left
-    image: https://res.cloudinary.com/dklongley/image/upload/wgallerymultipapo.jpg
+    image: https://res.cloudinary.com/dklongley/image/upload/w_558/gallerymultipapo.jpg
     image_alt: Hero placeholder image
     image_position: right
     has_background: true
