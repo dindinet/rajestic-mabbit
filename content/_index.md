@@ -46,7 +46,7 @@ sections:
           diam quam nulla. Ullamcorper a lacus vestibulum sed arcu non odio
           euismod lacinia.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/bananas.jpg
+        image: https://res.cloudinary.com/dklongley/image/upload/w_558/bananas.jpg
         image_alt: Feature 2 placeholder image
         image_position: left
         actions:
