@@ -18,7 +18,7 @@ seo:
   type: stackbit_page_meta
 layout: post
 author: data/team/dave-longley.json
-image: 'https://res.cloudinary.com/dklongley/image/upload/w_300/borrego.jpg'
+image: 'https://res.cloudinary.com/dklongley/image/upload/borrego.jpg'
 ---
 ## Sheep of Dipsum
 
