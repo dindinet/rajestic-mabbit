@@ -1,7 +1,8 @@
 ---
 title: Lorem Ipsum makes us Tipsum
 date: '2021-04-13'
-categories: []
+categories:
+  - data/categories/news.json
 tags: []
 image_alt: lorem-ipsum
 excerpt: lorem-ipsum
