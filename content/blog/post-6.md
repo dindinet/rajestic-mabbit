@@ -15,6 +15,7 @@ seo:
   type: stackbit_page_meta
 layout: post
 author: data/team/dave-longley.json
+image: images/5.png
 ---
 ## Lorem ipsum
 
