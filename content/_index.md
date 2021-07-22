@@ -57,7 +57,7 @@ sections:
       - title: Feature 3
         content: >-
           Id nibh tortor id aliquet lectus proin. Amet venenatis urna cursus
-          eget nunc. Lacus sed turpis tincidunt id aliquet risus feugiat in
+          eget nunc.[^1] Lacus sed turpis tincidunt id aliquet risus feugiat in
           ante.
         align: left
         image: 'https://res.cloudinary.com/dklongley/image/upload/w_558/lemons.jpg'
