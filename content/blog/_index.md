@@ -4,6 +4,7 @@ sections:
   - type: hero_section
     title: Blog
     align: center
+    image: images/3.png
   - type: blog_feed_section
     show_recent: false
 seo:
