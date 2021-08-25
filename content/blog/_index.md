@@ -4,7 +4,6 @@ sections:
   - type: hero_section
     title: Blog
     align: center
-    image: images/3.png
     has_background: true
     background:
       background_color: white
