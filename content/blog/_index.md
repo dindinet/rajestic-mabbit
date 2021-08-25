@@ -5,6 +5,7 @@ sections:
     title: Blog
     align: center
     image: images/3.png
+    has_background: true
   - type: blog_feed_section
     show_recent: false
 seo:
