@@ -11,6 +11,7 @@ sections:
       background_image_opacity: 0
       background_image_size: cover
       background_image_repeat: no-repeat
+      background_image: images/2.png
   - type: blog_feed_section
     show_recent: false
 seo:
