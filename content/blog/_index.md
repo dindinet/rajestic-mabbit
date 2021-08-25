@@ -6,6 +6,11 @@ sections:
     align: center
     image: images/3.png
     has_background: true
+    background:
+      background_color: white
+      background_image_opacity: 0
+      background_image_size: cover
+      background_image_repeat: no-repeat
   - type: blog_feed_section
     show_recent: false
 seo:
