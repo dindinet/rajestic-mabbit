@@ -20,6 +20,7 @@ sections:
         image_position: left
         actions: []
         type: feature
+        image: images/lemons.png
     type: features_section
 seo:
   title: ''
