@@ -16,15 +16,15 @@ params:
       - label: Style Guide
         url: /style-guide
         style: link
-      - url: /contact
-        style: primary
-        label: Contact Us
       - label: Shout Out
         url: /shouting
         style: link
         new_window: false
         no_follow: false
         type: action
+      - url: /contact
+        style: primary
+        label: Contact Us
     title: Shout Me a River
   footer:
     has_nav: true
