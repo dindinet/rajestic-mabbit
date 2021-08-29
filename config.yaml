@@ -19,7 +19,7 @@ params:
       - url: /contact
         style: primary
         label: Contact Us
-    title: Finisher
+    title: Shout Me a River
   footer:
     has_nav: true
     nav_links:
