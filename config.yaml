@@ -25,12 +25,6 @@ params:
         new_window: false
         no_follow: false
         type: action
-      - label: lorem-ipsum
-        url: '#'
-        style: link
-        new_window: false
-        no_follow: false
-        type: action
     title: Shout Me a River
   footer:
     has_nav: true
