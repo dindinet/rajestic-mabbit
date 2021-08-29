@@ -19,7 +19,7 @@ params:
       - url: /contact
         style: primary
         label: Contact Us
-      - label: SHout Out
+      - label: Shout Out
         url: '#'
         style: link
         new_window: false
