@@ -20,7 +20,7 @@ params:
         style: primary
         label: Contact Us
       - label: Shout Out
-        url: '#'
+        url: '#shouting'
         style: link
         new_window: false
         no_follow: false
