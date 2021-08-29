@@ -19,7 +19,7 @@ params:
       - url: /contact
         style: primary
         label: Contact Us
-      - label: lorem-ipsum
+      - label: SHout Out
         url: '#'
         style: link
         new_window: false
