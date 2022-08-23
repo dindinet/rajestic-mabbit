@@ -38,7 +38,7 @@ seo:
       relativeUrl: true
 layout: post
 ---
-![ladies](https://user-images.githubusercontent.com/2939526/186269105-98e8dc6e-3711-4ca0-96b2-2f3ea1a8b793.jpg)
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.[^1] Sed ea mala virtuti magnitudine obruebantur. Duo Reges: constructio interrete. An hoc usque quaque, aliter in vita? Gracchum patrem non beatiorem fuisse quam fillum, cum alter stabilire rem publicam studuerit, alter evertere. Quo plebiscito decreta a senatu est consuli quaestio Cn. Illud non continuo, ut aeque incontentae. Atqui pugnantibus et contrariis studiis consiliisque semper utens nihil quieti videre, nihil tranquilli potest. Itaque hoc frequenter dici solet a vobis, non intellegere nos, quam dicat Epicurus voluptatem. Sin kakan malitiam dixisses, ad aliud nos unum certum vitium consuetudo Latina traduceret.
 
@@ -48,6 +48,8 @@ Utrum igitur tibi litteram videor an totas paginas commovere?[^2] Potius inflamm
 
 Nemo nostrum istius generis asotos iucunde putat vivere.[^3]
 Est enim tanti philosophi tamque nobilis audacter sua decreta defendere. Sed eum qui audiebant, quoad poterant, defendebant sententiam suam. Atqui, inquam, Cato, si istud optinueris, traducas me ad te totum licebit. Quam ob rem tandem, inquit, non satisfacit? Vestri haec verecundius, illi fortasse constantius. Quorum sine causa fieri nihil putandum est. Non modo carum sibi quemque, verum etiam vehementer carum esse? Nemo nostrum istius generis asotos iucunde putat vivere.
+
+![ladies](https://user-images.githubusercontent.com/2939526/186269105-98e8dc6e-3711-4ca0-96b2-2f3ea1a8b793.jpg)
 
 Expressa vero in iis aetatibus, quae iam confirmatae sunt.
 Ne amores quidem sanctos a sapiente alienos esse arbitrantur. Quid enim de amicitia statueris utilitatis causa expetenda vides. Nihil acciderat ei, quod nollet, nisi quod anulum, quo delectabatur, in mari abiecerat. Quid enim possumus hoc agere divinius? Dic in quovis conventu te omnia facere, ne doleas. Omnes enim iucundum motum, quo sensus hilaretur. Hoc loco discipulos quaerere videtur, ut, qui asoti esse velint, philosophi ante fiant. Hoc loco tenere se Triarius non potuit. Nunc haec primum fortasse audientis servire debemus. Sin dicit obscurari quaedam nec apparere, quia valde parva sint, nos quoque concedimus; Isto modo ne improbos quidem, si essent boni viri. Quid censes in Latino fore?
