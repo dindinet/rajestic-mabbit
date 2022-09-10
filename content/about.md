@@ -2,7 +2,7 @@
 title: Who We Are
 sections:
 - type: hero_section
-  title: Who We Are or Aren't
+  title: Who We Are and Who We Are Not
   align: center
   image_position: right
 - type: content_section
