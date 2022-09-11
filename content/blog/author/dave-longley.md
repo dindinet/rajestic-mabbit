@@ -1,8 +1,8 @@
 ---
-title: Dianne Ameter
+title: Dave Longley
 sections:
   - type: hero_section
-    title: All Posts By Dave LOngley
+    title: All Posts By Dave Longley
     align: center
   - type: blog_feed_section
     show_recent: false
