@@ -10,8 +10,8 @@
   <div class="container container--lg">
     <div class="flex flex--col-3">
 
-      {{ range $person := $section.team }}
-      {{ $person_data := getJSON $person }}
+      {{ range $person_id := $section.team }}
+      {{ $person_data := index site.Data.team $person_id }}
       <div class="cell">
         <div class="card team-member">
           {{ if $person_data.photo }}

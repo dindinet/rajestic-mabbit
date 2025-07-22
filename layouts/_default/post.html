@@ -18,11 +18,13 @@
       <div class="post__meta">
         <span>On <time datetime="{{ .Date | dateFormat "2006-01-02 15:04" }}">{{ .Date | dateFormat "January 02, 2006" }}</time></span>
         {{ if .Params.author }}
-          {{ $author := getJSON $.Params.author }}
-          {{ if $author.link }}
-            <span> by <a href="{{ $author.link | relURL }}">{{ $author.first_name }} {{ $author.last_name }}</a></span>
-          {{ else }}
-            <span> by {{ $author.first_name }} {{ $author.last_name }}</span>
+          {{ $author := index site.Data.team .Params.author }}
+          {{ if $author }}
+            {{ if $author.link }}
+              <span> by <a href="{{ $author.link | relURL }}">{{ $author.first_name }} {{ $author.last_name }}</a></span>
+            {{ else }}
+              <span> by {{ $author.first_name }} {{ $author.last_name }}</span>
+            {{ end }}
           {{ end }}
         {{ end }}
       </div>

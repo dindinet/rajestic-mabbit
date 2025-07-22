@@ -22,7 +22,7 @@
             <meta {{ $key_name }}="{{ $meta.name }}" content="{{ $meta.value }}">
           {{ end }}
         {{ end }}
-        <link rel="stylesheet" href="{{ (resources.Get "sass/main.scss" | resources.ToCSS (dict "indentWidth" 4 "outputStyle" "compressed" "precision" 10 "targetPath" "css/main.css")).Permalink }}">
+        <link rel="stylesheet" href="{{ (resources.Get "sass/main.scss" | css.Sass (dict "indentWidth" 4 "outputStyle" "compressed" "precision" 10 "targetPath" "css/main.css")).Permalink }}">
         {{ if .Site.Params.favicon }}
         <link rel="icon" href="{{ $.Site.Params.favicon | relURL }}">
         {{ end }}

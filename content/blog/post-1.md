@@ -1,10 +1,10 @@
 ---
 title: Utrum Igitur Tibi Litteram Videor An Totas Paginas
 date: '2020-04-16'
-author: data/team/dianne-ameter.json
+author: dianne-ameter
 categories:
-  - data/categories/tutorials.json
-  - data/categories/general.json
+  - tutorials
+  - general
 image: https://res.cloudinary.com/dklongley/image/upload/bananas.jpg
 image_alt: Post 1 placeholder image
 excerpt: >-

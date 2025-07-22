@@ -2,8 +2,8 @@
 title: Lorem Ipsum makes us Tipsum
 date: '2021-04-13'
 categories:
-  - data/categories/news.json
-  - data/categories/tutorials.json
+  - news
+  - tutorials
 tags: []
 image_alt: Pomme
 excerpt: >-
@@ -17,7 +17,7 @@ seo:
   extra: []
   type: stackbit_page_meta
 layout: post
-author: data/team/dave-longley.json
+author: dave-longley
 image: 'https://res.cloudinary.com/dklongley/image/upload/borrego.jpg'
 ---
 ## Sheep of Dipsum

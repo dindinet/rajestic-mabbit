@@ -11,30 +11,38 @@
     <div class="flex flex--col-3">
       {{ $section_author := false }}
       {{ if $section.author }}
-        {{ $section_author = getJSON $section.author }}
+        {{ $author_id_kebab := replace (replace $section.author "data/team/" "") ".json" "" }}
+        {{ if index site.Data.team $author_id_kebab }}
+          {{ $section_author = index site.Data.team $author_id_kebab }}
+        {{ end }}
       {{ end }}
 
       {{ $section_category := false }}
       {{ if $section.category }}
-        {{ $section_category = getJSON $section.category }}
+        {{ $category_id := replace (replace $section.category "data/categories/" "") ".json" "" }}
+        {{ $category_id = replace $category_id "-" "_" }}
+        {{ if index site.Data.categories $category_id }}
+          {{ $section_category = index site.Data.categories $category_id }}
+        {{ end }}
       {{ end }}
 
-      {{ $posts_all := (.Site.GetPage "section" "/blog").Pages }}
-      {{ $posts_sorted := $posts_all.ByDate.Reverse }}
+      {{ $posts := where .Site.Pages "Params.layout" "post" }}
+      {{ if $section_author }}
+        {{ $posts = where $posts "Params.author" "eq" $section_author.id }}
+      {{ else if $section_category }}
+        {{ $posts = where $posts "Params.categories" "intersect" (slice $section_category.id) }}
+      {{ end }}
+      {{ $posts_sorted := $posts.ByDate.Reverse }}
 
       {{ $show_recent := $section.show_recent }}
       {{ $recent_count := $section.recent_count }}
       {{ $post_count := 0 }}
 
       {{ range $post := $posts_sorted }}
-        {{ $is_post := false }}
-        {{ if eq $post.Params.layout "post" }}
-            {{ $is_post = true }}
-        {{ end }}
-        {{ if and $is_post (or (eq $show_recent false) (lt $post_count $recent_count)) }}
+        {{ if and (or (eq $show_recent false) (lt $post_count $recent_count)) }}
           {{ $post_count = add $post_count 1 }}
-          {{ $include_dict := dict "blog_feed_section" $section "post_page" $post "section_author" $section_author "section_category" $section_category }}
-          {{ partial "blog_feed_item_filter.html" $include_dict }}
+          {{ $include_dict := dict "blog_feed_section" $section "post_page" $post }}
+          {{ partial "blog_post_feed_item.html" $include_dict }}
         {{ end }}
       {{ end }}
     </div>

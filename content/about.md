@@ -15,12 +15,12 @@ sections:
 - type: team_section
   title: Our Team
   team:
-  - data/team/miles-tone.json
-  - data/team/dianne-ameter.json
-  - data/team/eleanor-carr.json
-  - data/team/hanson-deck.json
-  - data/team/gordon-norman.json
-  - data/team/dave-longley.json
+  - miles-tone
+  - dianne-ameter
+  - eleanor-carr
+  - hanson-deck
+  - gordon-norman
+  - dave-longley
 - type: cta_section
   title: Join the Team
   subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.

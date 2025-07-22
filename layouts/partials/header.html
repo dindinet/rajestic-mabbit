@@ -22,7 +22,7 @@
             </button>
             <ul class="navbar__list menu">
               {{ range $action := $.Site.Params.header.nav_links }}
-                {{ $pageUrl := trim $.URL "/" }}
+                {{ $pageUrl := trim $.RelPermalink "/" }}
                 {{ $actionUrl := trim $action.url "/" }}
                 <li class="navbar__item{{ if ne $action.style "link" }} navbar__item--btn{{ end }}{{ if eq $pageUrl $actionUrl }} is-active{{ end }}">
                   {{ $include_dict := dict "action" $action }}

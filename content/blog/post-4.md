@@ -1,10 +1,10 @@
 ---
 title: Vos Autem Cum Perspicuis Dubia Debeatis Illustrare
 date: '2020-05-30'
-author: data/team/dianne-ameter.json
+author: dianne-ameter
 categories:
-  - data/categories/tutorials.json
-  - data/categories/news.json
+  - tutorials
+  - news
 tags:
   - JAMstack
   - Sourcebit

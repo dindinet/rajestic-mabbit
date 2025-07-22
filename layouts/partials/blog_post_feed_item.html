@@ -3,7 +3,7 @@
 <article class="cell">
   <div class="card">
     {{ if $post.Params.image }}
-    <a class="card__media card__media--top" href="{{ $post.URL }}">
+    <a class="card__media card__media--top" href="{{ $post.RelPermalink }}">
       <img src="{{ replace $post.Params.image "upload" "upload/w_362"  | relURL }}" alt="{{ $post.Params.image_alt }}" />
     </a>
     {{ end }}
@@ -14,9 +14,9 @@
           {{ partial "blog_post_categories.html" $include_dict }}
         {{ end }}
         {{ if $blog_feed_section.title }}
-          <h3 class="h4 card__title"><a href="{{ $post.URL }}">{{ $post.Params.title }}</a></h3>
+          <h3 class="h4 card__title"><a href="{{ $post.RelPermalink }}">{{ $post.Params.title }}</a></h3>
         {{ else }}
-          <h2 class="h4 card__title"><a href="{{ $post.URL }}">{{ $post.Params.title }}</a></h2>
+          <h2 class="h4 card__title"><a href="{{ $post.RelPermalink }}">{{ $post.Params.title }}</a></h2>
         {{ end }}
       </header>
       {{ if $post.Params.excerpt }}
@@ -27,11 +27,13 @@
       <footer class="card__footer">
         <span>On <time datetime="{{ $post.Date | dateFormat "2006-01-02 15:04" }}">{{ $post.Date | dateFormat "January 02, 2006" }}</time></span>
         {{ if $post.Params.author }}
-          {{ $author := getJSON $post.Params.author }}
-          {{ if $author.link }}
-            <span> by <a href="{{ $author.link | relURL }}">{{ $author.first_name }} {{ $author.last_name }}</a></span>
-          {{ else }}
-            <span> by {{ $author.first_name }} {{ $author.last_name }}</span>
+          {{ $author := index site.Data.team $post.Params.author }}
+          {{ if $author }}
+            {{ if $author.link }}
+              <span> by <a href="{{ $author.link | relURL }}">{{ $author.first_name }} {{ $author.last_name }}</a></span>
+            {{ else }}
+              <span> by {{ $author.first_name }} {{ $author.last_name }}</span>
+            {{ end }}
           {{ end }}
         {{ end }}
       </footer>

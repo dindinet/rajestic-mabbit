@@ -1,10 +1,10 @@
 ---
 title: 'Non Minor, Inquit, Voluptas Percipitur Ex Vilissimis'
 date: '2020-05-25'
-author: data/team/miles-tone.json
+author: miles-tone
 categories:
-  - data/categories/news.json
-  - data/categories/general.json
+  - news
+  - general
 tags:
   - Jamstack
   - Netlify
