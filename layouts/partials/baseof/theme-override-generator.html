@@ -1,0 +1,153 @@
+{{/* 
+  Theme Override Generator
+  
+  Add this to baseof.html AFTER your main CSS link but BEFORE closing </head>
+  This generates inline CSS overrides from your data/theme.yaml file
+*/}}
+
+{{/* Load theme configuration */}}
+{{- $theme := site.Data.theme -}}
+
+{{/* Generate CSS custom property overrides */}}
+{{- $overrideCSS := "" -}}
+
+{{/* Layout overrides */}}
+{{- if $theme.layout -}}
+  {{- with $theme.layout.content_width -}}
+    {{- $overrideCSS = printf "%s\n  --content-width: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.section_spacing -}}
+    {{- $overrideCSS = printf "%s\n  --section-spacing: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.section_spacing_large -}}
+    {{- $overrideCSS = printf "%s\n  --section-spacing-large: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.container_narrow -}}
+    {{- $overrideCSS = printf "%s\n  --container-narrow: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.container_medium -}}
+    {{- $overrideCSS = printf "%s\n  --container-medium: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.container_wide -}}
+    {{- $overrideCSS = printf "%s\n  --container-wide: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.container_full -}}
+    {{- $overrideCSS = printf "%s\n  --container-full: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.grid_gap -}}
+    {{- $overrideCSS = printf "%s\n  --grid-gap: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.layout.grid_gap_large -}}
+    {{- $overrideCSS = printf "%s\n  --grid-gap-large: %s;" $overrideCSS . -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Color overrides */}}
+{{- if $theme.colors -}}
+  {{- with $theme.colors.primary -}}
+    {{- $overrideCSS = printf "%s\n  --color-primary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.secondary -}}
+    {{- $overrideCSS = printf "%s\n  --color-secondary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.accent -}}
+    {{- $overrideCSS = printf "%s\n  --color-accent: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.text_primary -}}
+    {{- $overrideCSS = printf "%s\n  --text-primary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.text_secondary -}}
+    {{- $overrideCSS = printf "%s\n  --text-secondary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.text_muted -}}
+    {{- $overrideCSS = printf "%s\n  --text-muted: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.bg_primary -}}
+    {{- $overrideCSS = printf "%s\n  --bg-primary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.bg_secondary -}}
+    {{- $overrideCSS = printf "%s\n  --bg-secondary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.bg_tertiary -}}
+    {{- $overrideCSS = printf "%s\n  --bg-tertiary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.border_light -}}
+    {{- $overrideCSS = printf "%s\n  --border-light: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.border_medium -}}
+    {{- $overrideCSS = printf "%s\n  --border-medium: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.colors.border_dark -}}
+    {{- $overrideCSS = printf "%s\n  --border-dark: %s;" $overrideCSS . -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Typography overrides */}}
+{{- if $theme.typography -}}
+  {{- with $theme.typography.font_primary -}}
+    {{- $overrideCSS = printf "%s\n  --font-primary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.typography.font_secondary -}}
+    {{- $overrideCSS = printf "%s\n  --font-secondary: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- with $theme.typography.font_mono -}}
+    {{- $overrideCSS = printf "%s\n  --font-mono: %s;" $overrideCSS . -}}
+  {{- end -}}
+  {{- range $key, $value := $theme.typography -}}
+    {{- if hasPrefix $key "text_" -}}
+      {{- $cssVar := replace $key "_" "-" -}}
+      {{- $overrideCSS = printf "%s\n  --%s: %s;" $overrideCSS $cssVar $value -}}
+    {{- end -}}
+    {{- if hasPrefix $key "leading_" -}}
+      {{- $cssVar := replace $key "_" "-" -}}
+      {{- $overrideCSS = printf "%s\n  --%s: %s;" $overrideCSS $cssVar $value -}}
+    {{- end -}}
+    {{- if hasPrefix $key "font_" -}}
+      {{- $cssVar := replace $key "_" "-" -}}
+      {{- $overrideCSS = printf "%s\n  --%s: %s;" $overrideCSS $cssVar $value -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Spacing overrides */}}
+{{- if $theme.spacing -}}
+  {{- range $key, $value := $theme.spacing -}}
+    {{- $cssVar := replace $key "_" "-" -}}
+    {{- $overrideCSS = printf "%s\n  --%s: %s;" $overrideCSS $cssVar $value -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Borders overrides */}}
+{{- if $theme.borders -}}
+  {{- range $key, $value := $theme.borders -}}
+    {{- $cssVar := replace $key "_" "-" -}}
+    {{- $overrideCSS = printf "%s\n  --%s: %s;" $overrideCSS $cssVar $value -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Shadows overrides */}}
+{{- if $theme.shadows -}}
+  {{- range $key, $value := $theme.shadows -}}
+    {{- $cssVar := replace $key "_" "-" -}}
+    {{- $overrideCSS = printf "%s\n  --%s: %s;" $overrideCSS $cssVar $value -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Animation overrides */}}
+{{- if $theme.animation -}}
+  {{- range $key, $value := $theme.animation -}}
+    {{- $cssVar := replace $key "_" "-" -}}
+    {{- $overrideCSS = printf "%s\n  --%s: %s;" $overrideCSS $cssVar $value -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Output inline CSS overrides if we have any */}}
+{{- if ne (strings.TrimSpace $overrideCSS) "" -}}
+<style>
+:root {{{ $overrideCSS | safeCSS }}
+{{- if $theme.layout.content_width -}}
+  --container-active: var(--container-{{ $theme.layout.content_width }});
+{{- end -}}
+}
+</style>
+{{- end -}}

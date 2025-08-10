@@ -1,0 +1,123 @@
+{{/* 
+  Responsive Picture Partial (with Container Width Support)
+  
+  Usage:
+  {{ partial "responsive-picture.html" (dict 
+    "src" "images/hero.jpg"
+    "alt" "Hero image"
+    "class" "responsive-img"
+    "containerWidth" 100
+    "loading" "lazy" ( OR "eager" OR "auto")
+  ) }}
+  
+  Or with specific breakpoint widths:
+  {{ partial "responsive-picture.html" (dict 
+    "src" "images/card.jpg"
+    "alt" "Card image"
+    "containerWidth" (dict 
+      "desktop" 33
+      "tablet" 50
+      "mobile" 100
+    )
+  ) }}
+  
+  Breakpoints:
+  - Desktop (1200px+): Base sizes 1200w, 900w, 600w
+  - Tablet (768px-1199px): Base sizes 900w, 600w, 400w  
+  - Mobile (up to 767px): Base sizes 600w, 400w, 300w
+*/}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $containerWidth := .containerWidth | default 100 -}}
+{{- $loading := .loading | default "" -}}
+
+{{/* Check if image is SVG */}}
+{{- $isSVG := eq (path.Ext $src) ".svg" -}}
+
+{{/* Check if image is remote */}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+
+{{/* Function to calculate container width for breakpoint */}}
+{{- $getContainerWidth := "" -}}
+{{- if reflect.IsMap $containerWidth -}}
+  {{- $getContainerWidth = $containerWidth -}}
+{{- else -}}
+  {{- $getContainerWidth = dict "desktop" $containerWidth "tablet" $containerWidth "mobile" $containerWidth -}}
+{{- end -}}
+
+{{/* Get container widths with defaults */}}
+{{- $desktopWidth := index $getContainerWidth "desktop" | default 100 -}}
+{{- $tabletWidth := index $getContainerWidth "tablet" | default 100 -}}
+{{- $mobileWidth := index $getContainerWidth "mobile" | default 100 -}}
+
+{{/* Calculate actual image sizes needed */}}
+{{- $desktopSizes := slice (div (mul 1200 $desktopWidth) 100) (div (mul 900 $desktopWidth) 100) (div (mul 600 $desktopWidth) 100) -}}
+{{- $tabletSizes := slice (div (mul 900 $tabletWidth) 100) (div (mul 600 $tabletWidth) 100) (div (mul 400 $tabletWidth) 100) -}}
+{{- $mobileSizes := slice (div (mul 600 $mobileWidth) 100) (div (mul 400 $mobileWidth) 100) (div (mul 300 $mobileWidth) 100) -}}
+
+{{/* Handle SVG case - output simple img tag */}}
+{{- if $isSVG -}}
+  <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with $loading }} loading="{{ . }}"{{ end }}>
+{{- else -}}
+  {{/* Get the image resource */}}
+  {{- $image := "" -}}
+  {{- if $isRemote -}}
+    {{- $tryResult := try (resources.GetRemote $src) -}}
+    {{- if $tryResult -}}
+      {{- $image = $tryResult.Value -}}
+    {{- else -}}
+      {{/* Fallback if remote image fails to load */}}
+              <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with $loading }} loading="{{ . }}"{{ end }}>
+    {{- end -}}
+  {{- else -}}
+    {{- $image = resources.Get $src -}}
+  {{- end -}}
+
+  {{- if $image -}}
+    <picture{{ with $class }} class="{{ . }}"{{ end }}>
+      {{/* Desktop (1200px+) - WebP */}}
+      {{- $desktop1200webp := $image.Resize (printf "%dx webp" (index $desktopSizes 0)) -}}
+      {{- $desktop900webp := $image.Resize (printf "%dx webp" (index $desktopSizes 1)) -}}
+      {{- $desktop600webp := $image.Resize (printf "%dx webp" (index $desktopSizes 2)) -}}
+      <source media="(min-width: 1200px)" type="image/webp" srcset="{{ $desktop1200webp.RelPermalink }} {{ index $desktopSizes 0 }}w, {{ $desktop900webp.RelPermalink }} {{ index $desktopSizes 1 }}w, {{ $desktop600webp.RelPermalink }} {{ index $desktopSizes 2 }}w">
+      
+      {{/* Desktop (1200px+) - JPEG fallback */}}
+      {{- $desktop1200jpg := $image.Resize (printf "%dx" (index $desktopSizes 0)) -}}
+      {{- $desktop900jpg := $image.Resize (printf "%dx" (index $desktopSizes 1)) -}}
+      {{- $desktop600jpg := $image.Resize (printf "%dx" (index $desktopSizes 2)) -}}
+      <source media="(min-width: 1200px)" srcset="{{ $desktop1200jpg.RelPermalink }} {{ index $desktopSizes 0 }}w, {{ $desktop900jpg.RelPermalink }} {{ index $desktopSizes 1 }}w, {{ $desktop600jpg.RelPermalink }} {{ index $desktopSizes 2 }}w">
+      
+      {{/* Tablet (768px-1199px) - WebP */}}
+      {{- $tablet900webp := $image.Resize (printf "%dx webp" (index $tabletSizes 0)) -}}
+      {{- $tablet600webp := $image.Resize (printf "%dx webp" (index $tabletSizes 1)) -}}
+      {{- $tablet400webp := $image.Resize (printf "%dx webp" (index $tabletSizes 2)) -}}
+      <source media="(min-width: 768px)" type="image/webp" srcset="{{ $tablet900webp.RelPermalink }} {{ index $tabletSizes 0 }}w, {{ $tablet600webp.RelPermalink }} {{ index $tabletSizes 1 }}w, {{ $tablet400webp.RelPermalink }} {{ index $tabletSizes 2 }}w">
+      
+      {{/* Tablet (768px-1199px) - JPEG fallback */}}
+      {{- $tablet900jpg := $image.Resize (printf "%dx" (index $tabletSizes 0)) -}}
+      {{- $tablet600jpg := $image.Resize (printf "%dx" (index $tabletSizes 1)) -}}
+      {{- $tablet400jpg := $image.Resize (printf "%dx" (index $tabletSizes 2)) -}}
+      <source media="(min-width: 768px)" srcset="{{ $tablet900jpg.RelPermalink }} {{ index $tabletSizes 0 }}w, {{ $tablet600jpg.RelPermalink }} {{ index $tabletSizes 1 }}w, {{ $tablet400jpg.RelPermalink }} {{ index $tabletSizes 2 }}w">
+      
+      {{/* Mobile (up to 767px) - WebP */}}
+      {{- $mobile600webp := $image.Resize (printf "%dx webp" (index $mobileSizes 0)) -}}
+      {{- $mobile400webp := $image.Resize (printf "%dx webp" (index $mobileSizes 1)) -}}
+      {{- $mobile300webp := $image.Resize (printf "%dx webp" (index $mobileSizes 2)) -}}
+      <source type="image/webp" srcset="{{ $mobile600webp.RelPermalink }} {{ index $mobileSizes 0 }}w, {{ $mobile400webp.RelPermalink }} {{ index $mobileSizes 1 }}w, {{ $mobile300webp.RelPermalink }} {{ index $mobileSizes 2 }}w">
+      
+      {{/* Mobile (up to 767px) - JPEG fallback */}}
+      {{- $mobile600jpg := $image.Resize (printf "%dx" (index $mobileSizes 0)) -}}
+      {{- $mobile400jpg := $image.Resize (printf "%dx" (index $mobileSizes 1)) -}}
+      {{- $mobile300jpg := $image.Resize (printf "%dx" (index $mobileSizes 2)) -}}
+      <source srcset="{{ $mobile600jpg.RelPermalink }} {{ index $mobileSizes 0 }}w, {{ $mobile400jpg.RelPermalink }} {{ index $mobileSizes 1 }}w, {{ $mobile300jpg.RelPermalink }} {{ index $mobileSizes 2 }}w">
+      
+      {{/* Fallback img for old browsers - use middle tablet size */}}
+      <img src="{{ $tablet600jpg.RelPermalink }}" alt="{{ $alt }}"{{ with $loading }} loading="{{ . }}"{{ end }}>
+    </picture>
+  {{- else -}}
+    {{/* Fallback if image resource not found */}}
+    <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with $loading }} loading="{{ . }}"{{ end }}>
+  {{- end -}}
+{{- end -}}

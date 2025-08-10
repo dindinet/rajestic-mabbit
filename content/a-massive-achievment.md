@@ -14,7 +14,7 @@ sections:
     subtitle: You have done your bit. It's time to come home.
     title: My Bloody Hero
     type: hero_section
-    image: /images/italianvillage.jpg
+    image: images/italianvillage.jpg
     actions:
       - style: primary
         label: Screen the idea

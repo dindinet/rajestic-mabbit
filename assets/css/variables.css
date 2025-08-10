@@ -1,0 +1,149 @@
+/* 
+  CSS Custom Properties Foundation
+  
+  These are the default values that can be overridden by the theme data file.
+  All partials should use these custom properties instead of hard-coded values.
+*/
+
+:root {
+  /* Layout Variables */
+  --content-width: medium;
+  --section-spacing: 2rem;
+  --section-spacing-large: 4rem;
+  
+  /* Container Widths */
+  --container-narrow: 768px;
+  --container-medium: 1024px;
+  --container-wide: 1200px;
+  --container-full: 100%;
+  
+  /* Active Container (set based on --content-width) */
+  --container-active: var(--container-medium);
+  
+  /* Grid */
+  --grid-gap: 1rem;
+  --grid-gap-large: 2rem;
+  
+  /* Colors */
+  --color-primary: #3B82F6;
+  --color-secondary: #8B5CF6;
+  --color-accent: #F59E0B;
+  
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --bg-tertiary: #F3F4F6;
+  
+  --border-light: #E5E7EB;
+  --border-medium: #D1D5DB;
+  --border-dark: #9CA3AF;
+  
+  /* Typography */
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-secondary: 'Merriweather', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Component Spacing */
+  --button-padding-x: 1rem;
+  --button-padding-y: 0.5rem;
+  --card-padding: 1.5rem;
+  --section-padding-y: 3rem;
+  
+  /* Borders */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+  
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  
+  --ease-in: ease-in;
+  --ease-out: ease-out;
+  --ease-in-out: ease-in-out;
+}
+
+/* Container Width Logic */
+:root[data-content-width="narrow"] {
+  --container-active: var(--container-narrow);
+}
+
+:root[data-content-width="medium"] {
+  --container-active: var(--container-medium);
+}
+
+:root[data-content-width="wide"] {
+  --container-active: var(--container-wide);
+}
+
+:root[data-content-width="full"] {
+  --container-active: var(--container-full);
+}
+
+/* Base Container Class */
+.container {
+  width: 100%;
+  max-width: var(--container-active);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+/* Section Spacing Utilities */
+.section {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+.section--spacing {
+  margin-bottom: var(--section-spacing);
+}
+
+.section--spacing-large {
+  margin-bottom: var(--section-spacing-large);
+}

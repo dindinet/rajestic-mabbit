@@ -1,0 +1,41 @@
+{{/* Set defaults */}}
+{{ $opts := . | merge (dict
+    "alt" ""
+    "class" ""
+    "loading" ""
+    "webpHint" "photo"
+    "breakpoints" (slice 768 992 1200)
+    "widths" (slice 768 992 1200 -1)
+    "quality" 85)
+}}
+
+{{/*
+    Hugo doesn't seem to distinguish between image resources well.
+    Therefore, pass the image path as another variant.
+*/}}
+
+{{ if in $opts.img "://"}} 
+
+    {{ with resources.GetRemote $opts.img  }}
+
+        {{ if eq .MediaType.SubType "svg" }} <!-- 3.5  -->               
+            <img src="{{ .RelPermalink }}"  alt="{{ $opts.alt }} -remote">              
+        {{ else }} 
+          {{ partial "responsiveimages" (dict "img" . "alt" $opts.alt "breakpoints" $opts.breakpoints "widths" $opts.widths)}}
+       {{ end }}
+
+    {{ end }}
+
+{{ else }}
+
+    {{ with resources.Get $opts.img  }}
+
+        {{ if eq .MediaType.SubType "svg" }} <!-- 3.5  -->               
+            <img src="{{ .RelPermalink }}"  alt="{{ $opts.alt }} -local">              
+        {{ else }}
+          {{ partial "responsiveimages" (dict "img" . "alt" $opts.alt "breakpoints" $opts.breakpoints "widths" $opts.widths)}}
+        {{ end}}
+
+    {{ end }}
+
+{{ end }}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Universal CSS Bundle (includes variables.css first, then partials-generated.css) -->
+  {{ partial "universal-css-collector.html" . }}
+  
+  <!-- Theme Overrides (inline styles that override the variables) -->
+  {{ partial "theme-override-generator.html" . }}
+</head>
+<body>
+  {{ block "main" . }}{{ end }}
+</body>
+</html>

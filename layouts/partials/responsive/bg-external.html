@@ -1,0 +1,78 @@
+{{/* 
+  Responsive Background Image Partial (External CSS Approach)
+  
+  Usage in templates:
+  {{ partial "responsive-bg-external.html" (dict 
+    "src" "images/hero.jpg"
+    "alt" "Hero image"
+    "class" "hero-section"
+    "containerWidth" 100
+  ) }}
+  
+  Then in your layout head:
+  {{ partial "bg-styles.html" . }}
+  
+  This approach:
+  1. Collects CSS rules in a scratch variable
+  2. Generates external CSS file via Hugo's asset pipeline
+  3. Includes CSS link in head
+*/}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "bg-responsive" -}}
+{{- $containerWidth := .containerWidth | default 100 -}}
+{{- $bgSize := .bgSize | default "cover" -}}
+{{- $bgRepeat := .bgRepeat | default "no-repeat" -}}
+{{- $bgPosition := .bgPosition | default "center" -}}
+
+{{/* Generate unique class name to avoid conflicts */}}
+{{- $uniqueClass := printf "%s-%s" $class (substr (md5 $src) 0 8) -}}
+
+{{/* Check if image is SVG */}}
+{{- $isSVG := eq (path.Ext $src) ".svg" -}}
+
+{{/* Check if image is remote */}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+
+{{/* Get existing CSS rules from scratch */}}
+{{- $existingCSS := .Page.Scratch.Get "bgImageCSS" | default "" -}}
+
+{{/* Generate CSS rule for this background image */}}
+{{- $cssRule := "" -}}
+{{- if $isSVG -}}
+  {{- $cssRule = printf ".%s { background-image: url('%s'); background-size: %s; background-repeat: %s; background-position: %s; position: relative; } .%s picture { position: absolute; top: 0; left: 0; width: 100%%; height: 100%%; } .%s picture img { width: 100%%; height: 100%%; object-fit: %s; object-position: %s; }" $uniqueClass $src $bgSize $bgRepeat $bgPosition $uniqueClass $uniqueClass $bgSize $bgPosition -}}
+{{- else -}}
+  {{/* Get the image resource for fallback */}}
+  {{- $image := "" -}}
+  {{- if $isRemote -}}
+    {{- $tryResult := try (resources.GetRemote $src) -}}
+    {{- if $tryResult -}}
+      {{- $image = $tryResult.Value -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $image = resources.Get $src -}}
+  {{- end -}}
+  
+  {{- if $image -}}
+    {{/* Use a medium-sized image for the CSS fallback */}}
+    {{- $fallbackImg := $image.Resize "800x" -}}
+    {{- $cssRule = printf ".%s { background-image: url('%s'); background-size: %s; background-repeat: %s; background-position: %s; position: relative; } .%s picture { position: absolute; top: 0; left: 0; width: 100%%; height: 100%%; } .%s picture img { width: 100%%; height: 100%%; object-fit: %s; object-position: %s; }" $uniqueClass $fallbackImg.RelPermalink $bgSize $bgRepeat $bgPosition $uniqueClass $uniqueClass $bgSize $bgPosition -}}
+  {{- else -}}
+    {{/* Fallback if image not found */}}
+    {{- $cssRule = printf ".%s { background-image: url('%s'); background-size: %s; background-repeat: %s; background-position: %s; position: relative; } .%s picture { position: absolute; top: 0; left: 0; width: 100%%; height: 100%%; } .%s picture img { width: 100%%; height: 100%%; object-fit: %s; object-position: %s; }" $uniqueClass $src $bgSize $bgRepeat $bgPosition $uniqueClass $uniqueClass $bgSize $bgPosition -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Add CSS rule to scratch (accumulate all rules) */}}
+{{- .Page.Scratch.Set "bgImageCSS" (printf "%s\n%s" $existingCSS $cssRule) -}}
+
+{{/* Output the HTML structure */}}
+<div class="{{ $uniqueClass }}{{ with $class }} {{ . }}{{ end }}">
+  {{/* Use our existing responsive-picture partial */}}
+  {{ partial "responsive-picture.html" (dict 
+    "src" $src
+    "alt" $alt
+    "containerWidth" $containerWidth
+  ) }}
+</div>

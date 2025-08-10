@@ -138,7 +138,30 @@ const run = () => {
             return h('div', { className: 'page-preview' }, section_widgets);
         };
 
+        const PostPreview = (props) => {
+            const { entry, getAsset, widgetFor } = props;
+            const title = entry.getIn(['data', 'title']);
+            const image = getAsset(entry.getIn(['data', 'image']));
+            const image_alt = entry.getIn(['data', 'image_alt']);
+            const author = entry.getIn(['data', 'author']);
+            const categories = entry.getIn(['data', 'categories']);
+            const date = entry.getIn(['data', 'date']);
+            const body = widgetFor('body');
+
+            return h('div', { className: 'post-preview' },
+                h('h1', null, title),
+                h('div', { className: 'post-meta' },
+                    h('span', { className: 'date' }, date && new Date(date).toLocaleDateString()),
+                    h('span', { className: 'author' }, author),
+                    h('span', { className: 'categories' }, categories?.join(', '))
+                ),
+                image && h('img', { src: image.toString(), alt: image_alt }),
+                h('div', { className: 'post-body' }, body)
+            );
+        };
+
         CMS.registerPreviewTemplate("home", PagePreview);
+        CMS.registerPreviewTemplate("posts", PostPreview);
     };
 
     check();

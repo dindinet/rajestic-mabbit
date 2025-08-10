@@ -1,0 +1,67 @@
+{{/* 
+  Responsive Background Image Partial (Hybrid Approach)
+  
+  Usage:
+  {{ partial "responsive-bg-hybrid.html" (dict 
+    "src" "images/hero.jpg"
+    "alt" "Hero image"
+    "class" "hero-section"
+    "containerWidth" 100
+  ) }}
+  
+  Generates a div with:
+  - CSS background-image as fallback
+  - Foreground <picture> element for responsive images
+  - Proper accessibility with alt text
+*/}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "bg-responsive" -}}
+{{- $containerWidth := .containerWidth | default 100 -}}
+{{- $bgSize := .bgSize | default "cover" -}}
+{{- $bgRepeat := .bgRepeat | default "no-repeat" -}}
+{{- $bgPosition := .bgPosition | default "center" -}}
+
+{{/* Generate unique class name to avoid conflicts */}}
+{{- $uniqueClass := printf "%s-%s" $class (substr (md5 $src) 0 8) -}}
+
+{{/* Check if image is SVG */}}
+{{- $isSVG := eq (path.Ext $src) ".svg" -}}
+
+{{/* Check if image is remote */}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+
+<style>
+.{{ $uniqueClass }} {
+  background-image: url('{{ $src }}'); /* Fallback for older browsers */
+  background-size: {{ $bgSize }};
+  background-repeat: {{ $bgRepeat }};
+  background-position: {{ $bgPosition }};
+  position: relative;
+}
+
+.{{ $uniqueClass }} picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.{{ $uniqueClass }} picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: {{ $bgSize }};
+  object-position: {{ $bgPosition }};
+}
+</style>
+
+<div class="{{ $uniqueClass }}{{ with $class }} {{ . }}{{ end }}">
+  {{/* Use our existing responsive-picture partial */}}
+  {{ partial "responsive-picture.html" (dict 
+    "src" $src
+    "alt" $alt
+    "containerWidth" $containerWidth
+  ) }}
+</div>

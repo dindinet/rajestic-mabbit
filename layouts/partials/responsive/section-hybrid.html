@@ -1,0 +1,133 @@
+{{/* 
+  Responsive Section Hybrid Partial (Full Hybrid Approach)
+  
+  Usage:
+  {{ partial "responsive-section-hybrid.html" (dict 
+    "bgSrc" "images/hero-bg.jpg"
+    "fgSrc" "images/hero-fg.jpg"
+    "fgAlt" "Hero foreground image"
+    "class" "section hero inverse bg-blue section--padding"
+    "containerWidth" 100
+    "opacity" 0.6
+    "bgSize" "cover"
+    "fgContainerWidth" 50
+  ) }}
+    <div class="container container--lg">
+      <!-- Your section content here -->
+    </div>
+  </section>
+  
+  Creates a section with:
+  - Responsive background image (processed by Hugo)
+  - Responsive foreground picture element (optional)
+  - Proper layering and positioning
+  - All styling options
+*/}}
+
+{{- $bgSrc := .bgSrc -}}
+{{- $fgSrc := .fgSrc | default "" -}}
+{{- $fgAlt := .fgAlt | default "" -}}
+{{- $class := .class | default "section" -}}
+{{- $containerWidth := .containerWidth | default 100 -}}
+{{- $fgContainerWidth := .fgContainerWidth | default 100 -}}
+{{- $opacity := .opacity | default 1 -}}
+{{- $bgSize := .bgSize | default "cover" -}}
+{{- $bgRepeat := .bgRepeat | default "no-repeat" -}}
+{{- $bgPosition := .bgPosition | default "center" -}}
+
+{{/* Generate unique class name for styling */}}
+{{- $uniqueClass := printf "section-hybrid-%s" (substr (md5 (printf "%s%s" $bgSrc $fgSrc)) 0 8) -}}
+
+{{/* Check if background image is SVG */}}
+{{- $isBgSVG := eq (path.Ext $bgSrc) ".svg" -}}
+
+{{/* Check if background image is remote */}}
+{{- $isBgRemote := or (hasPrefix $bgSrc "http://") (hasPrefix $bgSrc "https://") -}}
+
+{{/* Process background image */}}
+{{- $bgImage := "" -}}
+{{- $bgUrl := $bgSrc -}}
+
+{{- if not $isBgSVG -}}
+  {{/* Get the background image resource */}}
+  {{- if $isBgRemote -}}
+    {{- $tryResult := try (resources.GetRemote $bgSrc) -}}
+    {{- if $tryResult -}}
+      {{- $bgImage = $tryResult.Value -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $bgImage = resources.Get $bgSrc -}}
+  {{- end -}}
+
+  {{- if $bgImage -}}
+    {{/* Calculate optimal background image size */}}
+    {{- $getContainerWidth := "" -}}
+    {{- if reflect.IsMap $containerWidth -}}
+      {{- $getContainerWidth = $containerWidth -}}
+    {{- else -}}
+      {{- $getContainerWidth = dict "desktop" $containerWidth "tablet" $containerWidth "mobile" $containerWidth -}}
+    {{- end -}}
+
+    {{- $desktopWidth := index $getContainerWidth "desktop" | default 100 -}}
+    {{- $tabletWidth := index $getContainerWidth "tablet" | default 100 -}}
+    {{- $mobileWidth := index $getContainerWidth "mobile" | default 100 -}}
+
+    {{- $desktopSize := div (mul 1200 $desktopWidth) 100 -}}
+    {{- $tabletSize := div (mul 900 $tabletWidth) 100 -}}
+    {{- $mobileSize := div (mul 600 $mobileWidth) 100 -}}
+    
+    {{/* Use the largest size needed for the background image */}}
+    {{- $maxSize := $desktopSize -}}
+    {{- if gt $tabletSize $maxSize -}}{{ $maxSize = $tabletSize }}{{- end -}}
+    {{- if gt $mobileSize $maxSize -}}{{ $maxSize = $mobileSize }}{{- end -}}
+    
+    {{- $processedBgImage := $bgImage.Resize (printf "%dx" $maxSize) -}}
+    {{- $bgUrl = $processedBgImage.RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+<style>
+.{{ $uniqueClass }} {
+  background-image: url('{{ $bgUrl }}');
+  opacity: {{ $opacity }};
+  background-size: {{ $bgSize }};
+  background-repeat: {{ $bgRepeat }};
+  background-position: {{ $bgPosition }};
+  position: relative;
+}
+
+.{{ $uniqueClass }} .section-fg-picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allow clicks to pass through to content */
+}
+
+.{{ $uniqueClass }} .section-fg-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: {{ $bgSize }};
+  object-position: {{ $bgPosition }};
+}
+
+.{{ $uniqueClass }} .section-content {
+  position: relative;
+  z-index: 1; /* Ensure content appears above background and foreground images */
+}
+</style>
+
+<section class="{{ $class }} {{ $uniqueClass }}">
+  {{- if $fgSrc -}}
+    {{/* Add foreground responsive picture */}}
+    <div class="section-fg-picture">
+      {{ partial "responsive-picture.html" (dict 
+        "src" $fgSrc
+        "alt" $fgAlt
+        "containerWidth" $fgContainerWidth
+      ) }}
+    </div>
+  {{- end -}}
+  
+  <div class="section-content">

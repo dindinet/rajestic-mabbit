@@ -4,9 +4,7 @@ backend:
   name: git-gateway
   branch: main
 
-
-
-media_folder: "static/images"
+media_folder: "/assets/images"
 public_folder: "/images"
 
 collections:
@@ -94,3 +92,170 @@ collections:
                       - {label: Style, name: style, widget: select, options: ["primary", "secondary"]}
                   - {label: Has Background, name: has_background, widget: boolean, default: false}
                   - {label: Background Color, name: background_color, widget: string}
+
+
+      - file: "content/about.md"
+        label: "About Page"
+        name: "about"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - file: "content/style-guide.md"
+        label: "Style Guide"
+        name: "style-guide"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - file: "content/features.md"
+        label: "Features Page"
+        name: "features"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - file: "content/contact.md"
+        label: "Contact Page"
+        name: "contact"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - file: "content/terms.md"
+        label: "Terms Page"
+        name: "terms"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - file: "content/a-massive-achievment.md"
+        label: "A massive achievment"
+        name: "a-massive-achievment"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", "default": "advanced"}
+          - name: sections
+            label: Page Sections
+            widget: list
+            types:
+              - name: hero_section
+                label: Hero Section
+                widget: object
+                fields:
+                  - {label: Title, name: title, widget: string}
+                  - {label: Subtitle, name: subtitle, widget: string}
+                  - {label: Image, name: image, widget: image}
+                  - {label: Image Alt, name: image_alt, widget: string}
+                  - {label: Image Position, name: image_position, widget: select, options: ["left", "right"]}
+                  - {label: Align, name: align, widget: select, options: ["left", "center", "right"]}
+                  - name: actions
+                    label: Actions
+                    widget: list
+                    fields:
+                      - {label: Label, name: label, widget: string}
+                      - {label: URL, name: url, widget: string}
+                      - {label: Style, name: style, widget: select, options: ["primary", "secondary"]}
+                  - name: background
+                    label: Background
+                    widget: object
+                    fields:
+                      - {label: Background Color, name: background_color, widget: string}
+                      - {label: Background Image, name: background_image, widget: image}
+                      - {label: Background Image Opacity, name: background_image_opacity, widget: number, value_type: "int", min: 0, max: 100}
+                      - {label: Background Image Size, name: background_image_size, widget: select, options: ["cover", "contain"]}
+                      - {label: Background Image Repeat, name: background_image_repeat, widget: select, options: ["no-repeat", "repeat"]}
+                  - {label: "Has Background", name: "has_background", widget: "boolean", default: false}
+              - name: features_section
+                label: Features Section
+                widget: object
+                fields:
+                  - {label: Title, name: title, widget: string}
+                  - name: features
+                    label: Features
+                    widget: list
+                    fields:
+                      - {label: Title, name: title, widget: string}
+                      - {label: Content, name: content, widget: markdown}
+                      - {label: Image, name: image, widget: image}
+                      - {label: Image Alt, name: image_alt, widget: string}
+                      - {label: Image Position, name: image_position, widget: select, options: ["left", "right"]}
+                      - {label: Align, name: align, widget: select, options: ["left", "center", "right"]}
+                      - name: actions
+                        label: Actions
+                        widget: list
+                        fields:
+                          - {label: Label, name: label, widget: string}
+                          - {label: URL, name: url, widget: string}
+                          - {label: Style, name: style, widget: select, options: ["primary", "secondary"]}
+              - name: blog_feed_section
+                label: Blog Feed Section
+                widget: object
+                fields:
+                  - {label: Title, name: title, widget: string}
+                  - {label: Show Recent, name: show_recent, widget: boolean, default: true}
+                  - {label: Recent Count, name: recent_count, widget: number, value_type: "int"}
+              - name: cta_section
+                label: CTA Section
+                widget: object
+                fields:
+                  - {label: Title, name: title, widget: string}
+                  - {label: Subtitle, name: subtitle, widget: string}
+                  - name: actions
+                    label: Actions
+                    widget: list
+                    fields:
+                      - {label: Label, name: label, widget: string}
+                      - {label: URL, name: url, widget: string}
+                      - {label: Style, name: style, widget: select, options: ["primary", "secondary"]}
+                  - {label: Has Background, name: has_background, widget: boolean, default: false}
+                  - {label: Background Color, name: background_color, widget: string}
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Author", name: "author", widget: "relation", collection: "authors", search_fields: ["first_name", "last_name"], display_fields: ["first_name", "last_name"], value_field: "id"}
+      - {label: "Categories", name: "categories", widget: "relation", collection: "categories", search_fields: ["title"], display_fields: ["title"], value_field: "id", multiple: true}
+      - {label: "Featured Image", name: "image", widget: "image"}
+      - {label: "Image Alt", name: "image_alt", widget: "string"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - name: seo
+        label: SEO
+        widget: object
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Description, name: description, widget: string}
+          - name: extra
+            label: Extra
+            widget: list
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: Value, name: value, widget: string}
+              - {label: Key Name, name: keyName, widget: string}
+              - {label: Relative URL, name: relativeUrl, widget: boolean, default: false}
+
+  - name: "authors"
+    label: "Authors"
+    folder: "data/team"
+    create: true
+    fields:
+      - {label: "ID", name: "id", widget: "string"}
+      - {label: "First Name", name: "first_name", widget: "string"}
+      - {label: "Last Name", name: "last_name", widget: "string"}
+      - {label: "Photo", name: "photo", widget: "image"}
+      - {label: "Photo Alt", name: "photo_alt", widget: "string"}
+      - {label: "Bio", name: "bio", widget: "text"}
+
+  - name: "categories"
+    label: "Categories"
+    folder: "data/categories"
+    create: true
+    fields:
+      - {label: "ID", name: "id", widget: "string"}
+      - {label: "Title", name: "title", widget: "string"}

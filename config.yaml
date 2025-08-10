@@ -1,5 +1,8 @@
 title: Stackbit Starter Theme
 baseURL: /
+
+
+
 params:
   header:
     has_nav: true

@@ -1,0 +1,90 @@
+{{/* 
+  Responsive Picture Partial (Simplified)
+  
+  Usage:
+  {{ partial "responsive-picture.html" (dict 
+    "src" "images/hero.jpg"
+    "alt" "Hero image"
+    "class" "responsive-img"
+  ) }}
+  
+  Generates predefined breakpoints:
+  - Desktop (1200px+): 1200w, 900w, 600w
+  - Tablet (768px-1199px): 900w, 600w, 400w  
+  - Mobile (up to 767px): 600w, 400w, 300w
+*/}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+
+{{/* Check if image is SVG */}}
+{{- $isSVG := eq (path.Ext $src) ".svg" -}}
+
+{{/* Check if image is remote */}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+
+{{/* Handle SVG case - output simple img tag */}}
+{{- if $isSVG -}}
+  <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}>
+{{- else -}}
+  {{/* Get the image resource */}}
+  {{- $image := "" -}}
+  {{- if $isRemote -}}
+    {{- $tryResult := try (resources.GetRemote $src) -}}
+    {{- if $tryResult -}}
+      {{- $image = $tryResult.Value -}}
+    {{- else -}}
+      {{/* Fallback if remote image fails to load */}}
+      <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}>
+    {{- end -}}
+  {{- else -}}
+    {{- $image = resources.Get $src -}}
+  {{- end -}}
+
+  {{- if $image -}}
+    <picture{{ with $class }} class="{{ . }}"{{ end }}>
+      {{/* Desktop (1200px+) - WebP */}}
+      {{- $desktop1200webp := $image.Resize "1200x webp" -}}
+      {{- $desktop900webp := $image.Resize "900x webp" -}}
+      {{- $desktop600webp := $image.Resize "600x webp" -}}
+      <source media="(min-width: 1200px)" type="image/webp" srcset="{{ $desktop1200webp.RelPermalink }} 1200w, {{ $desktop900webp.RelPermalink }} 900w, {{ $desktop600webp.RelPermalink }} 600w">
+      
+      {{/* Desktop (1200px+) - JPEG fallback */}}
+      {{- $desktop1200jpg := $image.Resize "1200x" -}}
+      {{- $desktop900jpg := $image.Resize "900x" -}}
+      {{- $desktop600jpg := $image.Resize "600x" -}}
+      <source media="(min-width: 1200px)" srcset="{{ $desktop1200jpg.RelPermalink }} 1200w, {{ $desktop900jpg.RelPermalink }} 900w, {{ $desktop600jpg.RelPermalink }} 600w">
+      
+      {{/* Tablet (768px-1199px) - WebP */}}
+      {{- $tablet900webp := $image.Resize "900x webp" -}}
+      {{- $tablet600webp := $image.Resize "600x webp" -}}
+      {{- $tablet400webp := $image.Resize "400x webp" -}}
+      <source media="(min-width: 768px)" type="image/webp" srcset="{{ $tablet900webp.RelPermalink }} 900w, {{ $tablet600webp.RelPermalink }} 600w, {{ $tablet400webp.RelPermalink }} 400w">
+      
+      {{/* Tablet (768px-1199px) - JPEG fallback */}}
+      {{- $tablet900jpg := $image.Resize "900x" -}}
+      {{- $tablet600jpg := $image.Resize "600x" -}}
+      {{- $tablet400jpg := $image.Resize "400x" -}}
+      <source media="(min-width: 768px)" srcset="{{ $tablet900jpg.RelPermalink }} 900w, {{ $tablet600jpg.RelPermalink }} 600w, {{ $tablet400jpg.RelPermalink }} 400w">
+      
+      {{/* Mobile (up to 767px) - WebP */}}
+      {{- $mobile600webp := $image.Resize "600x webp" -}}
+      {{- $mobile400webp := $image.Resize "400x webp" -}}
+      {{- $mobile300webp := $image.Resize "300x webp" -}}
+      <source type="image/webp" srcset="{{ $mobile600webp.RelPermalink }} 600w, {{ $mobile400webp.RelPermalink }} 400w, {{ $mobile300webp.RelPermalink }} 300w">
+      
+      {{/* Mobile (up to 767px) - JPEG fallback */}}
+      {{- $mobile600jpg := $image.Resize "600x" -}}
+      {{- $mobile400jpg := $image.Resize "400x" -}}
+      {{- $mobile300jpg := $image.Resize "300x" -}}
+      <source srcset="{{ $mobile600jpg.RelPermalink }} 600w, {{ $mobile400jpg.RelPermalink }} 400w, {{ $mobile300jpg.RelPermalink }} 300w">
+      
+      {{/* Fallback img for old browsers */}}
+      <img src="{{ $desktop600jpg.RelPermalink }}" alt="{{ $alt }}" loading="lazy">
+    </picture>
+  {{- else -}}
+    {{/* Fallback if image resource not found */}}
+    <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}>
+  {{- end -}}
+{{- end -}}

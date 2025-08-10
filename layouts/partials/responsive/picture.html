@@ -1,0 +1,84 @@
+{{/* 
+  Responsive Picture Partial
+  
+  Usage:
+  {{ partial "responsive-picture.html" (dict 
+    "src" "images/hero.jpg"
+    "alt" "Hero image"
+    "class" "responsive-img"
+    "breakpoints" (slice 
+      (dict "media" "(min-width: 1200px)" "sizes" (slice 1200 800 600))
+      (dict "media" "(min-width: 768px)" "sizes" (slice 800 600 400))
+      (dict "media" "(max-width: 767px)" "sizes" (slice 600 400 300))
+    )
+  ) }}
+*/}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $breakpoints := .breakpoints -}}
+
+{{/* Check if image is SVG */}}
+{{- $isSVG := eq (path.Ext $src) ".svg" -}}
+
+{{/* Check if image is remote */}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+
+{{/* Handle SVG case - output simple img tag */}}
+{{- if $isSVG -}}
+  <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}>
+{{- else -}}
+  {{/* Get the image resource */}}
+  {{- $image := "" -}}
+  {{- if $isRemote -}}
+    {{- $tryResult := try (resources.GetRemote $src) -}}
+    {{- if $tryResult -}}
+      {{- $image = $tryResult.Value -}}
+    {{- else -}}
+      {{/* Fallback if remote image fails to load */}}
+      <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}>
+    {{- end -}}
+  {{- else -}}
+    {{- $image = resources.Get $src -}}
+  {{- end -}}
+
+  {{- if $image -}}
+    <picture{{ with $class }} class="{{ . }}"{{ end }}>
+      {{/* Generate source elements for each breakpoint */}}
+      {{- range $breakpoints -}}
+        {{- $media := .media -}}
+        {{- $sizes := .sizes -}}
+        {{- $srcsetWebP := slice -}}
+        {{- $srcsetJPG := slice -}}
+        
+        {{/* Generate srcset for each size in this breakpoint */}}
+        {{- range $sizes -}}
+          {{- $size := . -}}
+          {{- $resizedWebP := $image.Resize (printf "%dx webp" $size) -}}
+          {{- $resizedJPG := $image.Resize (printf "%dx" $size) -}}
+          {{- $srcsetWebP = $srcsetWebP | append (printf "%s %dw" $resizedWebP.RelPermalink $size) -}}
+          {{- $srcsetJPG = $srcsetJPG | append (printf "%s %dw" $resizedJPG.RelPermalink $size) -}}
+        {{- end -}}
+        
+        {{/* Output WebP source if supported */}}
+        <source media="{{ $media }}" type="image/webp" srcset="{{ delimit $srcsetWebP ", " }}">
+        {{/* Output fallback format source */}}
+        <source media="{{ $media }}" srcset="{{ delimit $srcsetJPG ", " }}">
+      {{- end -}}
+      
+      {{/* Fallback img tag - use the largest size from the first breakpoint */}}
+      {{- $fallbackSize := 800 -}}
+      {{- if $breakpoints -}}
+        {{- with (index $breakpoints 0).sizes -}}
+          {{- $fallbackSize = index . 0 -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $fallbackImg := $image.Resize (printf "%dx" $fallbackSize) -}}
+      <img src="{{ $fallbackImg.RelPermalink }}" alt="{{ $alt }}">
+    </picture>
+  {{- else -}}
+    {{/* Fallback if image resource not found */}}
+    <img src="{{ $src }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}>
+  {{- end -}}
+{{- end -}}

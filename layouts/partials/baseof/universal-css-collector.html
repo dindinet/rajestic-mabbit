@@ -1,0 +1,72 @@
+{{/* 
+  Universal CSS Collection System for baseof.html <head>
+  
+  This automatically discovers and bundles CSS from all partials that follow
+  the naming convention: css_collection_{partial_name}
+  
+  Add this to your baseof.html in the <head> section
+*/}}
+
+{{/* Get all site store keys and find CSS collections */}}
+{{- $allStoreData := .Site.Store -}}
+{{- $cssCollections := slice -}}
+{{- $dynamicCSSContent := "" -}}
+
+{{/* Loop through all site store data to find CSS collections */}}
+{{- range $key, $value := $allStoreData -}}
+  {{- if hasPrefix $key "css_collection_" -}}
+    {{/* Extract partial name from key */}}
+    {{- $partialName := strings.TrimPrefix $key "css_collection_" -}}
+    
+    {{/* Add comment header for this partial's CSS */}}
+    {{- $dynamicCSSContent = printf "%s\n/* === CSS from %s partial === */" $dynamicCSSContent $partialName -}}
+    
+    {{/* Add all CSS rules from this collection */}}
+    {{- range $class, $rule := $value -}}
+      {{- $dynamicCSSContent = printf "%s\n%s" $dynamicCSSContent $rule -}}
+    {{- end -}}
+    
+    {{- $dynamicCSSContent = printf "%s\n" $dynamicCSSContent -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Create dynamic CSS resource if we have any CSS */}}
+{{- $dynamicCSS := "" -}}
+{{- if ne (strings.TrimSpace $dynamicCSSContent) "" -}}
+  {{- $dynamicCSS = resources.FromString "css/partials-generated.css" $dynamicCSSContent -}}
+{{- end -}}
+
+{{/* Bundle all CSS files - include variables.css first */}}
+{{- $css := resources.Get "css/variables.css" | slice -}}
+{{- $additionalCSS := resources.Match "css/*.css" -}}
+{{- range $additionalCSS -}}
+  {{- if ne .Name "css/variables.css" -}}
+    {{- $css = $css | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Add dynamic CSS to the bundle if it exists */}}
+{{- if $dynamicCSS -}}
+  {{- $css = $css | append $dynamicCSS -}}
+{{- end -}}
+
+{{/* Concatenate and output final bundle */}}
+{{- if $css -}}
+  {{- $css = $css | resources.Concat "styles.css" -}}
+  {{- if hugo.IsProduction -}}
+    {{- $css = $css | resources.Minify -}}
+  {{- end -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{- end -}}
+
+{{/* Optional: Debug output in development */}}
+{{- if hugo.IsDevelopment -}}
+  {{- if $dynamicCSS -}}
+    <!-- Dynamic CSS collections found and bundled -->
+    {{- range $key, $value := $allStoreData -}}
+      {{- if hasPrefix $key "css_collection_" -}}
+        <!-- {{ strings.TrimPrefix $key "css_collection_" }}: {{ len $value }} rules -->
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

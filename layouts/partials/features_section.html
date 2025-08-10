@@ -1,5 +1,9 @@
 {{ $section := .section }}
-<section class="section section--features">
+  {{ partial "responsive/section-bg-gradient.html" (dict 
+    "class" "section features section--padding lingrad"
+    "containerWidth" 100
+     "linearGradient" (dict "angle" "45deg" "from" "#f0eee6" "to" "#faf9f5")
+  ) }}
 
   {{ if $section.title }}
   <div class="container container--md align-center">
@@ -9,14 +13,25 @@
 
   <div class="container container--lg">
 
-    {{ range $feature := $section.features }}
+  {{ range $feature := $section.features }} <!--1-->
     <div class="flex flex--middle flex--center flex--col-2{{ if eq $feature.align "center" }} align-center{{ end }}{{ if eq $feature.align "right" }} align-right{{ end }}">
 
-      {{ if $feature.image }}
-      <div class="cell section__media{{ if eq $feature.image_position "right" }} section__media--right{{ end }}">
-        <img src="{{ $feature.image | relURL }}" alt="{{ $feature.image_alt }}" />
-      </div>
-      {{ end }}
+  {{ if $feature.image }} <!-- 2-->
+    <div class="6 cell section__media{{ if eq $feature.image_position "right" }} section__media--right{{ end }}">
+      {{ partial "responsive/pictures-cw.html" 
+        (dict 
+         "src" $feature.image
+         "alt" $feature.image_alt
+         "loading" "lazy"
+         "class" "responsive-img"
+             "containerWidth" (dict 
+             "desktop" 50
+             "tablet" 50
+              )
+        ) 
+      }}    
+    </div>     
+  {{ end }} <!-- 2 END -->
 
       <div class="section__body cell">
         {{ if $feature.title }}
@@ -40,7 +55,7 @@
       </div>
 
     </div>
-    {{ end }}
+    {{ end }} <!--1 END -->
 
   </div>
 

@@ -1,0 +1,16 @@
+{{/* Set defaults */}}
+{{ $opts := . | merge (dict
+    "alt" ""
+    "class" ""
+    "loading" ""
+    "webpHint" "photo"
+    "breakpoints" (slice 768 992 1200)
+    "widths" (slice 768 992 1200 -1)
+    "quality" 85)
+}}
+
+{{/*
+    Hugo doesn't seem to distinguish between image resources well.
+    Therefore, pass the image path as another variant.
+*/}}
+{{ partial "_img" $opts . .img.Key }}

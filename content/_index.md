@@ -1,7 +1,9 @@
 ---
 title: Home
 sections:
-  - image_alt: The Multi Papo
+  - type: hero_section    
+    title: This Is A Hero Headline
+    image_alt: The Multi Papo
     align: left
     image_position: right
     background:
@@ -24,13 +26,21 @@ sections:
         style: secondary
   - type: features_section
     title: Features
+    background:
+      background_color: white
+      background_image: 
+      background_image_opacity: 60
+      background_image_size: cover
+      background_image_repeat: no-repeat
+    has_background: true
     features:
       - title: Feature 1
         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl
           ligula, cursus id molestie vel, maximus aliquet risus. Vivamus in nibh
           fringilla, fringilla.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/w_558/honeydew.jpg
+        trueimage: https://res.cloudinary.com/dklongley/image/upload/w_558/honeydew.jpg
+        image: images/honeydew.jpg
         image_alt: Feature 1 placeholder image
         image_position: right
         actions:
@@ -42,7 +52,7 @@ sections:
           quam nulla. Ullamcorper a lacus vestibulum sed arcu non odio euismod
           lacinia.
         align: left
-        image: https://res.cloudinary.com/dklongley/image/upload/w_558/bananas.jpg
+        image: /images/armeniana.png
         image_alt: Feature 2 placeholder image
         image_position: left
         actions:
@@ -63,7 +73,7 @@ sections:
   - type: blog_feed_section
     title: What's New
     show_recent: true
-    recent_count: 6
+    recent_count: 3
   - type: cta_section
     title: This Is A CTA
     subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
@@ -79,7 +89,7 @@ sections:
     features:
       - title: Turbo
         content: All account types get Turbo as standard.
-        image: /images/1.png
+        image: https://res.cloudinary.com/dklongley/image/upload/w_558/lemons.jpg
         image_alt: Turbo
         image_position: left
         align: center

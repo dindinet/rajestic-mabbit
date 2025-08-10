@@ -1,0 +1,29 @@
+{{/* 
+  Background Styles Partial
+  
+  Include this in your layout head AFTER all responsive-bg-external.html partials:
+  {{ partial "bg-styles.html" . }}
+  
+  This partial:
+  1. Gets all accumulated CSS rules from Page.Scratch
+  2. Creates a CSS resource using Hugo's asset pipeline
+  3. Outputs the CSS link tag
+*/}}
+
+{{- $accumulatedCSS := .Page.Scratch.Get "bgImageCSS" -}}
+{{- if $accumulatedCSS -}}
+  {{/* Create a unique filename based on page and CSS content */}}
+  {{- $cssHash := md5 (printf "%s%s" .Page.RelPermalink $accumulatedCSS) -}}
+  {{- $cssFilename := printf "css/bg-images-%s.css" (substr $cssHash 0 12) -}}
+  
+  {{/* Create CSS resource from string */}}
+  {{- $cssContent := $accumulatedCSS | resources.FromString $cssFilename -}}
+  
+  {{/* Minify CSS in production */}}
+  {{- if hugo.IsProduction -}}
+    {{- $cssContent = $cssContent | minify -}}
+  {{- end -}}
+  
+  {{/* Output CSS link tag */}}
+  <link rel="stylesheet" href="{{ $cssContent.RelPermalink }}" media="all">
+{{- end -}}

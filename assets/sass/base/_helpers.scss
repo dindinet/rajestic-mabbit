@@ -16,7 +16,9 @@
 .container--lg {
   max-width: $width-lg;
 }
-
+.container--xl {
+  max-width: $width-xl;
+}
 /* Headings */
 .h1 {
   @extend h1;
