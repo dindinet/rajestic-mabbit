@@ -144,10 +144,10 @@
 {{/* Output inline CSS overrides if we have any */}}
 {{- if ne (strings.TrimSpace $overrideCSS) "" -}}
 <style>
-:root {{{ $overrideCSS | safeCSS }}
+:root {{ "{" }}{{ $overrideCSS | safeCSS }}
 {{- if $theme.layout.content_width -}}
   --container-active: var(--container-{{ $theme.layout.content_width }});
 {{- end -}}
-}
+{{ "}" }}
 </style>
 {{- end -}}
