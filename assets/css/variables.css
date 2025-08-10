@@ -4,7 +4,6 @@
   These are the default values that can be overridden by the theme data file.
   All partials should use these custom properties instead of hard-coded values.
 */
-
 :root {
   /* Layout Variables */
   --content-width: medium;
