@@ -1,0 +1,70 @@
+/**
+ * Helper Classes
+ */
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  padding-left: 1.125rem;
+  padding-right: 1.125rem;
+}
+
+.container--md {
+  max-width: var(--width-md);
+}
+
+.container--lg {
+  max-width: var(--width-lg);
+}
+.container--xl {
+  max-width: var(--width-xl);
+}
+
+/* Text alignment */
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+/* Background image */
+.bg-image {
+  position: relative;
+}
+
+.bg-image__image {
+  background-position: center center;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Text meant only for screen readers */
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+/* Clear floats */
+.clear:after {
+  clear: both;
+}
+
+.clear:before,
+.clear:after {
+  content: "";
+  display: table;
+}

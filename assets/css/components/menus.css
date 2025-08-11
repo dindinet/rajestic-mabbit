@@ -1,0 +1,24 @@
+/**
+ * Menus
+ */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu li {
+  color: var(--color-nav-link);
+  line-height: 1.25;
+}
+.menu li .is-active {
+  color: var(--color-nav-link-active);
+}
+.menu a:not(.btn) {
+  border: 0;
+  color: inherit;
+  display: inline-block;
+  text-decoration: none;
+}
+.menu a:not(.btn) :hover {
+  color: var(--color-nav-link-hover);
+}

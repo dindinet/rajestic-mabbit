@@ -22,7 +22,27 @@
             <meta {{ $key_name }}="{{ $meta.name }}" content="{{ $meta.value }}">
           {{ end }}
         {{ end }}
-        <link rel="stylesheet" href="{{ (resources.Get "sass/main.scss" | css.Sass (dict "indentWidth" 4 "outputStyle" "compressed" "precision" 10 "targetPath" "css/main.css")).RelPermalink }}?2">
+        {{ $css := slice }}
+        {{ $css = $css | append (resources.Get "css/abstracts/variables.css") }}
+        {{ $css = $css | append (resources.Get "css/base/reset.css") }}
+        {{ $css = $css | append (resources.Get "css/base/base.css") }}
+        {{ $css = $css | append (resources.Get "css/base/helpers.css") }}
+        {{ $css = $css | append (resources.Get "css/components/forms.css") }}
+        {{ $css = $css | append (resources.Get "css/components/buttons.css") }}
+        {{ $css = $css | append (resources.Get "css/components/icons.css") }}
+        {{ $css = $css | append (resources.Get "css/components/tables.css") }}
+        {{ $css = $css | append (resources.Get "css/components/menus.css") }}
+        {{ $css = $css | append (resources.Get "css/components/grids.css") }}
+        {{ $css = $css | append (resources.Get "css/components/cards.css") }}
+        {{ $css = $css | append (resources.Get "css/components/inverse.css") }}
+        {{ $css = $css | append (resources.Get "css/components/banner.css") }}
+        {{ $css = $css | append (resources.Get "css/layouts/site.css") }}
+        {{ $css = $css | append (resources.Get "css/layouts/header.css") }}
+        {{ $css = $css | append (resources.Get "css/layouts/footer.css") }}
+        {{ $css = $css | append (resources.Get "css/layouts/post-page.css") }}
+        {{ $css = $css | append (resources.Get "css/layouts/section.css") }}
+
+        <link rel="stylesheet" href="{{ ($css | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint).RelPermalink }}">
         {{ if .Site.Params.favicon }}
         <link rel="icon" href="{{ $.Site.Params.favicon | relURL }}">
         {{ end }}

@@ -104,10 +104,10 @@
 }
 
 @include media-breakpoint-up(md) {
-  .section__media {
-    &--right {
+  .section__media--right  {
+    
       order: 1;
-    }
+    
   }
 }
 

@@ -1,0 +1,36 @@
+/**
+ * Styles for dark backgrounds
+ */
+.inverse {
+  color: var(--color-inverse-text);
+
+  a {
+    color: var(--color-inverse-link);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-inverse-heading);
+  }
+
+  .btn {
+    background-color: var(--color-inverse-btn-bg);
+    border-color: var(--color-inverse-btn-border);
+    color: var(--color-inverse-btn);
+  }
+
+  .btn--secondary {
+    background-color: var(--color-inverse-btn-alt-bg);
+    border-color: var(--color-inverse-btn-alt-border);
+    color: var(--color-inverse-btn-alt);
+  }
+
+  .btn--clear {
+    background: 0;
+    color: var(--color-inverse-btn-clear);
+  }
+}
