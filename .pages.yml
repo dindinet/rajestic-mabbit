@@ -18,6 +18,12 @@ content:
       - name: title
         label: Title
         type: string
+      - name: image
+        label: 'Hero Image'
+        type: image
+      - name: image_alt
+        label: 'Hero Image Alt Text'
+        type: string
       - name: body
         label: Body
         type: rich-text
