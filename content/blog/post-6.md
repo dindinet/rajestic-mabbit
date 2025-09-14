@@ -10,10 +10,8 @@ Quadripedalis est ovium, quæ ruminant mammalibus, penitus ignoramus quia jument
 *   Lorem ipsum^1
     
 *   dolor sit amet^2
-    
-*   nona pirena
-    
+*   pinit minit
 
 ![](https://res.cloudinary.com/dklongley/image/upload/w_400/borrego.jpg)
 
-![](/static/images/dream_1z59te5hq0i.jpg)
+![](/images/dream_1z59te5hq0i.jpg)
