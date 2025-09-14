@@ -21,3 +21,6 @@ content:
       - name: body
         label: Body
         type: rich-text
+      - name: layout
+        hidden: true
+        default: post
