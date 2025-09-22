@@ -6,4 +6,4 @@ layout: post
 ---
 He's more than allright, he is.
 
-![](/images/CatalanMerchantGarden.png)
+![Self made Catalan merchant](/images/CatalanMerchantGarden.png)
